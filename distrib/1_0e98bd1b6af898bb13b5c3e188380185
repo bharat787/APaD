@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+from subprocess import call
+import base64
+import os
+
+myArr = bytearray()
+with open("flagCheckerProtected", mode='rb') as file:
+    fileContent = file.read()
+
+for i in range(len(fileContent)):
+    myArr.append(fileContent[i] ^ 0x3C)
+    
+with open(r"/tmp/TMPWrngkr", "wb") as f:
+    f.write(myArr)
+
+os.system("chmod +x /tmp/TMPWrngkr")
+#run the new executable file created.
+call(["/tmp/TMPWrngkr"])
+
+#delete the file after the run
+os.system("rm /tmp/TMPWrngkr")
